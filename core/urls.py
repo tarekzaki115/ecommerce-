@@ -76,6 +76,8 @@ urlpatterns = [
     path("cartItems/<int:pk>/", CartItemDetail, name = "CartItemDetail"),
     path("Categories/", CategoryList, name = "CategoryList"),
     path("Categories/<int:pk>/", CategoryDetail, name = "CategoryDetail"),
+    path('dj-rest-auth/facebook/', FacebookLogin.as_view(), name='fb_login'),
+    path('dj-rest-auth/twitter/', TwitterLogin.as_view(), name='twitter_login')
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
