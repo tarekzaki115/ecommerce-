@@ -27,6 +27,7 @@ SECRET_KEY = "django-insecure-9c6g3l18!l@i#h2@4)g#_s4uabtje@9y@&+=22ba$4!--vp9ed
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+SITE_ID = 2
 ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = "user.User"
@@ -60,6 +61,32 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
+
+
+REST_AUTH  = {
+    'LOGIN_SERIALIZER': 'user.serializers.CustomerLoginSerializer',
+}
+
+#This is required otherwise it asks for email server
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# ACCOUNT_EMAIL_REQUIRED = True
+# AUTHENTICATION_METHOD = 'EMAIL'
+# ACCOUNT_EMAIL_VERIFICATION = 'optional'
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True   
+ACCOUNT_USERNAME_REQUIRED = False
+
+
+#Following is added to enable registration with email instead of username
+AUTHENTICATION_BACKENDS = (
+ # Needed to login by username in Django admin, regardless of `allauth`
+ "django.contrib.auth.backends.ModelBackend",
+
+ # `allauth` specific authentication methods, such as login by e-mail
+ "allauth.account.auth_backends.AuthenticationBackend",
+)
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
